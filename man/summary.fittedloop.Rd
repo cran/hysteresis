@@ -1,6 +1,7 @@
-\name{summary.ellipsefit}
+\name{summary.fittedloop}
 \alias{summary.ellipsefit}
 \alias{summary.fittedloop}
+\alias{summary.loop2r}
 
 \title{
 Summarizing and Bootstrapping Fitted Ellipses or Loops
@@ -9,10 +10,11 @@ Summarizing and Bootstrapping Fitted Ellipses or Loops
 summary methods for classes \code{ellipsefit} and \code{fittedloop} created by the functions \code{\link{fel}} and \code{\link{floop}}. Can bootstrap results to produce parameter estimates with reduced bias and standard errors.
 }
 \usage{
-## S3 method for class 'ellipsefit'
 \method{summary}{ellipsefit}(object,boot=TRUE, N = 1000, 
 studentize=TRUE, center=FALSE, cbb=NULL, joint=FALSE,seed=NULL,...)
 \method{summary}{fittedloop}(object,boot=TRUE,N=1000,
+cbb=NULL,joint=FALSE,seed=NULL,...)
+\method{summary}{loop2r}(object,boot=TRUE,N=1000,
 cbb=NULL,joint=FALSE,seed=NULL,...)
 }
 \arguments{
@@ -45,7 +47,7 @@ further arguments passed to or from other methods.
 }
 }
 \details{
-Bootstrap \code{ellipsefit} or \code{fittedloop} objects created by fitting hysteretic data with one of the functions \code{\link{fel}} or \code{\link{floop}} and produce statistical summaries. Bootstrapping reduces the bias on estimates and also gives standard errors. Bootstrap estimates are created by subtracting original estimates from bootstrap means to get a bias estimate, and then subtracting this bias from the original estimate.
+Bootstrap objects created by fitting hysteretic data with one of the functions \code{\link{fel}} or \code{\link{floop}} and produce statistical summaries. Bootstrapping reduces the bias on estimates and also gives standard errors. Bootstrap estimates are created by subtracting original estimates from bootstrap means to get a bias estimate, and then subtracting this bias from the original estimate.
 
 Residuals are studentized as if they were produced using the harmonic2 method, regardless of which method was actually used to produce them. However, unpublished simulation studies show that these studentized residuals provide better 95 percent coverages for all methods despite this. This studentization is not true studentization as in \code{\link{rstudent.ellipsefit}} as it only accounts for the influence matrix and does not divide by the standard deviation.
 
@@ -75,6 +77,8 @@ For bootstrapping
 }
 \references{
 Yang, F. and A. Parkhurst, Efficient Estimation of Elliptical Hysteresis (submitted)
+
+Correa, Solange, Extended Bootstrap Bias Correction with Application to Multilevel Modelling of Survey Data under Informative Sampling.
 }
 \author{
 Spencer Maynes, Fan Yang, and Anne Parkhurst.
@@ -85,7 +89,7 @@ Spencer Maynes, Fan Yang, and Anne Parkhurst.
 \examples{
 #Loop example with circular block bootstrapping
 loop1 <- mloop(n=1,m=2,sd.x=0.05,sd.y=0.05)
-loop1.fit <- floop(loop1$x,loop1$y,m=1,n=2)
+loop1.fit <- floop(loop1$x,loop1$y,m=2,n=1)
 boot.loop1 <- summary(loop1.fit,cbb=3)
 boot.loop1
 plot(boot.loop1)
@@ -97,6 +101,7 @@ boot.ellipse1.fit <- summary(ellipse1.fit)
 boot.ellipse1.fit
 plot(boot.ellipse1.fit,xlab="Input",ylab="Output",
 main="Bootstrapped Ellipse",putNumber=TRUE)
+
 }
 \keyword{ models }
 

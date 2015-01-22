@@ -1,12 +1,12 @@
 delta.error <- function(g){
   if (g$method=="nls") {
-    lag.se.delta<-as.vector(deltaMethod(g$fit, "(-atan (((sqrt((ampx^2+ampy^2+(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*sin(theta))/ ((sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*cos(theta))) - atan((-(sqrt((ampx^2+ampy^2+(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*cos(theta))/( (sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*sin(theta))))/(pi*2)")[[2]]*g$fit.statistics["period"])
-    area.se.delta<-deltaMethod(g$fit,"sqrt((((ampx)^2+(ampy)^2+((ampx)^2-(ampy)^2)/((cos(theta))^2-(sin(theta))^2))/2)  )*sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2)*pi")[[2]]
+    lag.se.delta <- as.vector(deltaMethod(g$fit, "(-atan (((sqrt((ampx^2+ampy^2+(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*sin(theta))/ ((sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*cos(theta))) - atan((-(sqrt((ampx^2+ampy^2+(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*cos(theta))/( (sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*sin(theta))))/(pi*2)")[[2]]*g$fit.statistics["period"])
+    area.se.delta <- deltaMethod(g$fit,"sqrt((((ampx)^2+(ampy)^2+((ampx)^2-(ampy)^2)/((cos(theta))^2-(sin(theta))^2))/2)  )*sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2)*pi")[[2]]
   coercion.se.delta <- deltaMethod(g$fit,  "ampx*sin(-atan (((sqrt((ampx^2+ampy^2+(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*sin(theta))/ ((sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*cos(theta))) - atan((-(sqrt((ampx^2+ampy^2+(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*cos(theta))/( (sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*sin(theta))))" )[[2]]
   retention.se.delta <- deltaMethod(g$fit, "ampy*sin(-atan (((sqrt((ampx^2+ampy^2+(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*sin(theta))/ ((sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*cos(theta))) - atan((-(sqrt((ampx^2+ampy^2+(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*cos(theta))/( (sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*sin(theta))))" )[[2]]
   rotated.se.angle <- coef(summary(g$fit))[5,2]*180/pi
-    split.angle = deltaMethod(g$fit, "(atan(sqrt(ampy^2-(ampy*sin(atan (((sqrt((ampx^2+ampy^2+(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*cos(theta))/ ((sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*sin(theta))) - atan((-(sqrt((ampx^2+ampy^2+(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*sin(theta))/( (-sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*cos(theta)))))^2)/ampx))*180/pi")[[2]]
-  SE<-c(coef(summary(g$fit))[c(3,4),2],"retention"=retention.se.delta,"coercion"=coercion.se.delta,"area"=area.se.delta,"lag"=lag.se.delta,"split.angle"=split.angle,coef(summary(g$fit))[c(1,2),2],"rote.deg"=rotated.se.angle)}
+    split.angle <- deltaMethod(g$fit, "(atan(sqrt(ampy^2-(ampy*sin(atan (((sqrt((ampx^2+ampy^2+(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*cos(theta))/ ((sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*sin(theta))) - atan((-(sqrt((ampx^2+ampy^2+(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*sin(theta))/( (-sqrt((ampx^2+ampy^2-(ampx^2-ampy^2)/((cos(theta))^2-(sin(theta))^2))/2))*cos(theta)))))^2)/ampx))*180/pi")[[2]]
+  SE <- c(coef(summary(g$fit))[c(3,4),2],"retention"=retention.se.delta,"coercion"=coercion.se.delta,"area"=area.se.delta,"lag"=lag.se.delta,"split.angle"=split.angle,coef(summary(g$fit))[c(1,2),2],"rote.deg"=rotated.se.angle)}
  
   if (g$method=="geometric") {
     vmat <- (as.vector(crossprod(g$residuals)/(g$fit.statistics["n"]-5))*solve(g$fit$hessian$J))
@@ -22,7 +22,7 @@ delta.error <- function(g){
     rotated.se.angle <- sqrt(abs(vmat[1,1]))*180/pi
     split.angle = deltaMethod(pars, "atan((sqrt((sqrt(((semi.major*sin(theta)-(-semi.major*sin(theta)*cos(pi/2-asin(semi.major*cos(theta)/sqrt((semi.major*cos(theta))^2+(semi.minor*sin(theta))^2))+pi/2)+semi.minor*cos(theta)*cos(-asin(semi.major*cos(theta)/sqrt((semi.major*cos(theta))^2+(semi.minor*sin(theta))^2))+pi/2))*sin(-asin(semi.major*cos(theta)/sqrt((semi.major*cos(theta))^2+(semi.minor*sin(theta))^2))+pi/2))/cos(-asin(semi.major*cos(theta)/sqrt((semi.major*cos(theta))^2+(semi.minor*sin(theta))^2))+pi/2))^2+(-semi.major*sin(theta)*cos(pi/2-asin(semi.major*cos(theta)/sqrt((semi.major*cos(theta))^2+(semi.minor*sin(theta))^2))+pi/2)+semi.minor*cos(theta)*cos(-asin(semi.major*cos(theta)/sqrt((semi.major*cos(theta))^2+(semi.minor*sin(theta))^2))+pi/2))^2))^2-(-semi.major*sin(theta)*cos(pi/2-asin(semi.major*cos(theta)/sqrt((semi.major*cos(theta))^2+(semi.minor*sin(theta))^2))+pi/2)+semi.minor*cos(theta)*cos(-asin(semi.major*cos(theta)/sqrt((semi.major*cos(theta))^2+(semi.minor*sin(theta))^2))+pi/2))^2))/(sqrt((semi.major*cos(theta))^2+(semi.minor*sin(theta))^2)))",vmat)[[2]]*180/pi
     
-    SE<-c("cx"=sqrt(abs(vmat[4,4])),"cy"=sqrt(abs(vmat[5,5])),"retention"=retention.se.delta,"coercion"=coercion.se.delta,"area"=area.se.delta,"lag"=lag.se.delta,"split.angle"=split.angle,"ampx"=ampx.delta,"ampy"=ampy.delta,"rote.deg"=rotated.se.angle)}
+    SE<-c("cx"=sqrt(abs(vmat[4,4])),"cy"=sqrt(abs(vmat[5,5])),"phase.angle"=sqrt(vmat[1,1]), "retention"=retention.se.delta,"coercion"=coercion.se.delta,"area"=area.se.delta,"lag"=lag.se.delta,"split.angle"=split.angle,"ampx"=ampx.delta,"ampy"=ampy.delta,"rote.deg"=rotated.se.angle)}
   
   else if (g$method=="lm") {
     angle.SE.delta<-deltaMethod(g$fit,"atan(xy/(1-y2))*90/pi")[[2]]
@@ -78,6 +78,7 @@ delta.error <- function(g){
     cov.matrix=matrix(c(cov.Ta[2,2],cov.Ta[2,3],0,0,cov.Ta[2,3],cov.Ta[3,3],0,0,0,0,cov.Tb[2,2],cov.Tb[2,3],0,0,cov.Tb[2,3],cov.Tb[3,3]),nrow=4)
     
     b.x <- deltamethod(~sqrt(x1^2+x2^2),c(z$coefficients[-1],z2$coefficients[-1]), cov.matrix)
+    phase.angle <- deltamethod(~ atan(x2/x1),c(z$coefficients[-1],z2$coefficients[-1]), cov.matrix)
     area<-deltamethod(~pi*sqrt(x1^2+x2^2)*x3,c(z$coefficients[-1],z2$coefficients[-1]), cov.matrix)
     coercion<-deltamethod(~sqrt(x1^2+x2^2)/sqrt(1+(x4/x3)^2),c(z$coefficients[-1],z2$coefficients[-1]), cov.matrix)
     lag<-deltamethod(~atan(x3/x4)/pi,c(z$coefficients[-1],z2$coefficients[-1]), cov.matrix)*g$fit.statistics["period"]/2
@@ -87,7 +88,7 @@ delta.error <- function(g){
     split.angle<- deltamethod(~atan(x4/sqrt(x1^2+x2^2)), c(z$coefficients[-1],z2$coefficients[-1]), cov.matrix)
     theta <- deltamethod(~ (-asin(2/(tan(atan(-x1/x2)-atan(-x3/x4))*((sqrt((x1^2+x2^2+x3^2+x4^2-sqrt((x1^2+x2^2+x3^2+x4^2)^2-4*(x1^2+x2^2)*(x3^2+x4^2)*sin(atan(-x1/x2)-atan(-x3/x4))^2))/2))/(sqrt((x1^2+x2^2+x3^2+x4^2+sqrt((x1^2+x2^2+x3^2+x4^2)^2-4*(x1^2+x2^2)*(x3^2+x4^2)*sin(atan(-x1/x2)-atan(-x3/x4))^2))/2))-(sqrt((x1^2+x2^2+x3^2+x4^2+sqrt((x1^2+x2^2+x3^2+x4^2)^2-4*(x1^2+x2^2)*(x3^2+x4^2)*sin(atan(-x1/x2)-atan(-x3/x4))^2))/2))/(sqrt((x1^2+x2^2+x3^2+x4^2-sqrt((x1^2+x2^2+x3^2+x4^2)^2-4*(x1^2+x2^2)*(x3^2+x4^2)*sin(atan(-x1/x2)-atan(-x3/x4))^2))/2)))))/2)*180/pi, c(z$coefficients[-1],z2$coefficients[-1]), cov.matrix)
     
-    SE <- c("b.x"=b.x,"b.y"=se2[3] ,"cx"=se1[1],"cy"=se2[1],"retention"=se2[2],"coercion"=coercion,"area"=area,"lag"=as.vector(lag),
+    SE <- c("b.x"=b.x,"b.y"=se2[3],"phase.angle"=phase.angle ,"cx"=se1[1],"cy"=se2[1],"retention"=se2[2],"coercion"=coercion,"area"=area,"lag"=as.vector(lag),
 "split.angle"=split.angle,"ampx"=ampx,"ampy"=ampy,"rote.deg"=theta)
   }
 

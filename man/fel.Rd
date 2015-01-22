@@ -45,7 +45,7 @@ is \code{\link{na.omit}}. Value \code{\link{na.exclude}} can be useful.
 logical, if \code{TRUE} results will be bootstrapped by \code{\link{summary.ellipsefit}}.
 }
   \item{...}{
-other optional arguments passed to \code{\link{summary.ellipsefit}} if \code{boot=TRUE}.
+other othrt optional arguments passed to \code{\link{summary.ellipsefit}} if \code{boot=TRUE}.
 }
 }
 \details{
@@ -108,15 +108,8 @@ Sellipse.fit$Estimates
 booted.Sellipse <- fel(Sellipse$x,Sellipse$y,boot=TRUE, seed=123)
 booted.Sellipse   #Gives boot estimates, boot bias, boot SE and boot quartiles
 plot(booted.Sellipse,main="Simulated Bootstrap Ellipse Loop",xlab="X Input",
-ylab="Y Output",show=c("rote.deg","semi.major","semi.minor"),
-values="ellipse.all")
+ylab="Y Output",values="ellipse.all")
 
-### Calibration Problem: Example when no times are not used
-data(IQsig,package="nlrwr") 
-Kaf=fel(IQsig$I,IQsig$Q, method="direct")
-Kaf
-plot(Kaf,xlab="I",ylab="Q",main="Calibration",data=IQsig, 
-value="ellipse.all",show=c("semi.major","semi.minor","rote.deg"))
 }
 \keyword{ models }
 

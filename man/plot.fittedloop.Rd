@@ -1,12 +1,16 @@
-\name{plot.ellipsefit}
+\name{plot.fittedloop}
 \alias{plot.ellipsefit}
 \alias{plot.ellipsesummary}
  \alias{plot.ellipsefitlist}
  \alias{plot.ellipsesummarylist}
  \alias{plot.fittedloop}
  \alias{plot.fittedlooplist}
+  \alias{plot.fittedlooplist2r}
  \alias{plot.loopsummary}
  \alias{plot.loopsummarylist}
+  \alias{plot.loopsummarylist2r}
+  \alias{plot.loop2r}
+ \alias{plot.loop2rsummary}
 \title{
 Plot a fitted ellipse or hysteresis loop.
 }
@@ -15,9 +19,9 @@ A scatterplot of x and y fitted with an ellipse or hysteresis loop. Uses objects
 }
 \usage{
 \method{plot}{ellipsefit}(x,putNumber=FALSE,values=NULL,
-xlim=NULL,ylim=NULL,main=NULL,newPred=TRUE,show=NULL,...)
+xlim=NULL,ylim=NULL,main=NULL,newPred=TRUE,show=NULL,split.line=FALSE,...)
 \method{plot}{ellipsesummary}(x,putNumber=FALSE,values=NULL,
-xlim=NULL,ylim=NULL,main=NULL,newPred=TRUE,show=NULL,...)
+xlim=NULL,ylim=NULL,main=NULL,newPred=TRUE,split.line=FALSE,...)
 
 \method{plot}{ellipsefitlist}(x,main=NULL, values=NULL, ...) 
 \method{plot}{ellipsesummarylist}(x,main=NULL, values=NULL, ...) 
@@ -25,10 +29,15 @@ xlim=NULL,ylim=NULL,main=NULL,newPred=TRUE,show=NULL,...)
 \method{plot}{fittedloop}(x,split.line=TRUE,xlim=NULL,
 ylim=NULL,putNumber=FALSE,values=NULL,main=NULL,show=NULL,...)
 \method{plot}{loopsummary}(x,split.line=TRUE,xlim=NULL,
-ylim=NULL,putNumber=FALSE,values=NULL,main=NULL,show=NULL,...)
+ylim=NULL,putNumber=FALSE,values=NULL,main=NULL,...)
 
 \method{plot}{fittedlooplist}(x,main=NULL,values=NULL,...)
 \method{plot}{loopsummarylist}(x,main=NULL,values=NULL,...)
+\method{plot}{fittedlooplist2r}(x,main=NULL,values=NULL,...)
+\method{plot}{loopsummarylist2r}(x,main=NULL,values=NULL,...)
+
+\method{plot}{loop2r}(x,split.line=TRUE,xlim=NULL,ylim=NULL,putNumber=FALSE,main=NULL,values=NULL,...)
+\method{plot}{loop2rsummary}(x,split.line=TRUE,xlim=NULL,ylim=NULL,putNumber=FALSE,main=NULL,values=NULL,...)
 
 }
 \arguments{
@@ -56,7 +65,7 @@ draw an ellipse with 100 points. If \code{FALSE} use predicted ellipse from \cod
   \item{show}{
 a character vector of parameters to be shown in the plot. 
 Possible values are "retention", "coercion", "b.x", "b.y", "semi.major","semi.minor","rote.deg","focus.x",and "focus.y". 
-\code{show} is only available for ellipses and loops where n=m=1. 
+\code{show} is not available for bootstrapped results. 
 }
   \item{split.line}{
 logical. Whether to include the split line, which is the input output relationship when hysteresis is removed.
@@ -94,5 +103,6 @@ plot(booted.loop,xlab="Input",ylab="Output",
 main="Simulated Bootstrapped Loop n=5, m=3",putNumber=TRUE)
 plot(booted.loop,main="Simulated Bootstrapped Loop n=5, m=3",
 xlab="Input",ylab="Output",values="hysteresis.all")
+
 }
 \keyword{ hplot }

@@ -1,5 +1,6 @@
 harmonic2summary <-
 function (g,N,studentize,cbb,joint) {
+
 xresid<-g$pred.x-g$x
 yresid<-g$pred.y-g$y
 n <- length(xresid)-3
@@ -24,19 +25,22 @@ bootfocus <- matrix(derived.focus(bootinternal1[,3],bootinternal1[,4],bootintern
 bootdat <- data.frame(bootdat,bootderived,bootinternal1,bootamps,bootfocus)  
 colnames(bootdat) <- names(g$values)
 
-if (diff(range(bootdat[,"rote.deg"])) > 170)
-  warning("Bootstrapped rote.deg values on both sides of 0, 180 degrees.")
+themean<-apply(bootdat,2,mean,na.rm=TRUE)
 
-error<-apply(bootdat,2,sd,na.rm=T)
-ranges<-apply(bootdat,2,quantile,probs=c(0.025,0.25,0.5,0.75,0.975),na.rm=T)
-themean<-apply(bootdat,2,mean,na.rm=T)
+error<-apply(bootdat,2,sd,na.rm=TRUE)
+ranges<-apply(bootdat,2,quantile,probs=c(0.025,0.25,0.5,0.75,0.975),na.rm=TRUE)
 full <- data.frame(g$values,t(ranges),error, themean)
 colnames(full) <- c("Orig.Estimate","B.q0.025","B.q0.25","B.q0.5","B.q0.75","B.q0.975","Std.Error","Boot.Mean")
 
 full$Bias <- full$Boot.Mean-full$Orig.Estimate
 full$Boot.Estimate <- full$Orig.Estimate-full$Bias
 full[,c("B.q0.025","B.q0.25","B.q0.5","B.q0.75","B.q0.975")]<-full[,c("B.q0.025","B.q0.25","B.q0.5","B.q0.75","B.q0.975")]-
-  full$Bias
+  2*full$Bias
+
+
+if (diff(range(bootdat[,"rote.deg"])) > 170)
+  warning("Bootstrapped rote.deg values on both sides of 0, 180 degrees.")
+  
 
 rad<-g$period.time+full["phase.angle","Boot.Estimate"]
 pred.x<-full["b.x","Boot.Estimate"]*cos(rad)+full["cx","Boot.Estimate"] 

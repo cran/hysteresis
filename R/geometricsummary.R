@@ -44,14 +44,14 @@ full$Bias <- full$Boot.Mean-full$Orig.Estimate
 full$Boot.Estimate <- full$Orig.Estimate-full$Bias    
     
 full[,c("B.q0.025","B.q0.25","B.q0.5","B.q0.75","B.q0.975")]<-full[,c("B.q0.025","B.q0.25","B.q0.5","B.q0.75","B.q0.975")]-
-      full$Bias
+      2*full$Bias
 
     
 rad<-g$period.time+full["Ta.phase","Boot.Estimate"]
 pred.x<-full["b.x","Boot.Estimate"]*cos(rad)+full["cx","Boot.Estimate"] 
 pred.y<-full["b.y","Boot.Estimate"]*cos(rad)+full["retention","Boot.Estimate"]*sin(rad)+full["cy","Boot.Estimate"]    
     
-    full <- full[c("b.x","b.y",
+    full <- full[c("b.x","b.y","phase.angle",
                    "cx","cy","retention","coercion","area",
                    "lag","split.angle","hysteresis.x","hysteresis.y","ampx","ampy","rote.deg","rote.rad",
                    "semi.major","semi.minor","focus.x","focus.y","eccentricity"),]

@@ -6,7 +6,7 @@
 Inherent and Derived Parameter Definitions for Hysteresis Loops/Ellipses
 }
 \description{
-\code{\link{floop}} returns a \code{fittedloop} object and calculates a variety of hysteresis loop parameters. This is a list of definitions for these parameters, as well as some only available for ellipses through \code{\link{fel}}. The generalized transcendental equations used to fit these loops are \deqn{x_t=b.x*cos(2pi*t/period+phase.angle)+cx+e_{x,t}} \deqn{y_t=b.y*cos(2pi*t/period+phase.angle)^n+retention*sin(2pi*t/period+phase.angle)^m+cy+e_{y,t}}  where \deqn{t=0,...,n.points-1 if times='equal'}
+\code{\link{floop}} returns a \code{fittedloop} object and calculates a variety of hysteresis loop parameters. This is a list of definitions for these parameters, as well as some only available for ellipses through \code{\link{fel}}. If \code{floop2r} is used a number of these parameters have differing values above and below the split line. The generalized transcendental equations used to fit these loops are \deqn{x_t=b.x*cos(2pi*t/period+phase.angle)+cx+e_{x,t}} \deqn{y_t=b.y*cos(2pi*t/period+phase.angle)^n+retention*sin(2pi*t/period+phase.angle)^m+cy+e_{y,t}}  where \deqn{t=0,...,n.points-1 if times='equal'}
 }
 
 \value{
@@ -40,11 +40,11 @@ Derived Hysteresis Parameters
   \item{coercion}{
   the horizontal distance of the input from the center. It indicates the strain the forcing function places on the output. It is the positive root of intersection between the loop and input axis.
   }
-  \item{area}{
-  the area of the hysteresis loop. Can indicate the work done during one cycle or period.
-  }
   \item{lag}{
   lag indicates the delay between attributes of the output and the input (such as peak to peak for the ellipse when m=1, n=1).
+  }
+  \item{area}{
+  the area of the hysteresis loop. Can indicate the work done during one cycle or period.
   }
   \item{split.angle}{
   beta, the angle between the tangent to the un-split curve at the center and the input axis.

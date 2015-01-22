@@ -1,4 +1,4 @@
-\name{residuals.ellipsefit}
+\name{residuals.fittedloop}
 \alias{residuals.ellipsefit}
 \alias{residuals.ellipsesummary}
 \alias{residuals.fittedloop}
@@ -7,6 +7,10 @@
 \alias{residuals.ellipsesummarylist}
 \alias{residuals.fittedlooplist}
 \alias{residuals.loopsummarylist}
+\alias{residuals.fittedlooplist2r}
+\alias{residuals.loopsummarylist2r}
+\alias{residuals.loop2r}
+\alias{residuals.loop2rsummary}
 \alias{rstudent.ellipsefit}
 \alias{rstudent.ellipsesummary}
 \alias{rstudent.fittedloop}
@@ -15,6 +19,10 @@
 \alias{rstudent.ellipsesummarylist}
 \alias{rstudent.fittedlooplist}
 \alias{rstudent.loopsummarylist}
+\alias{rstudent.fittedlooplist2r}
+\alias{rstudent.loopsummarylist2r}
+\alias{rstudent.loop2r}
+\alias{rstudent.loop2rsummary}
 \alias{fitted.ellipsefit}
 \alias{fitted.ellipsesummary}
 \alias{fitted.fittedloop}
@@ -23,6 +31,10 @@
 \alias{fitted.ellipsesummarylist}
 \alias{fitted.fittedlooplist}
 \alias{fitted.loopsummarylist}
+\alias{fitted.fittedlooplist2r}
+\alias{fitted.loopsummarylist2r}
+\alias{fitted.loop2r}
+\alias{fitted.loop2rsummary}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Residuals, studentized residuals and fitted values for the hysteresis package. 
@@ -32,8 +44,8 @@ Extract input, output, geometric and algebraic residuals, studentized residuals 
 }
 \usage{
 ##S3 methods for classes 'ellipsefit', 'ellipsesummary', 'fittedloop',
-##'loopsummary','ellipsefitlist', 'ellipsesummarylist', 'fittedlooplist' and
-##'loopsummarylist'.
+##'loopsummary','ellipsefitlist', 'ellipsesummarylist', 'fittedlooplist',
+##'loopsummarylist', 'loop2r', 'fittedlooplist2r', 'loopsummarylist2r' and 'loop2rsummary'.
 \method{residuals}{ellipsefit}(object,...)
 \method{rstudent}{ellipsefit}(model,...)
 \method{fitted}{ellipsefit}(object,...)

@@ -1,5 +1,6 @@
 \name{mloop}
 \alias{mloop}
+\alias{mloop2r}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Simulate (Make) a Hysteresis Loop
@@ -10,7 +11,8 @@ Simulate a hysteresis loop with a variety of possible parameters.
 \usage{
 mloop(cx = 0, cy = 0, retention = 0.2, b.x = 0.6, b.y = 0.8,n = 1, m = 1, 
      sd.x = 0, sd.y = 0, phase.angle = 0, n.points = 24, 
-    period = 24,extended.classical=FALSE)  
+    period = 24,extended.classical=FALSE,seed=NULL)  
+mloop2r(cx=0,cy=0,retention.above=0.2,retention.below=0.15,b.x=0.6,b.y=0.8,n=1,m=1,sd.x=0,sd.y=0,phase.angle=0,n.points=24,period=24,extended.classical=FALSE,seed=NULL)
 }
 
 \arguments{
@@ -36,7 +38,15 @@ number. Center of input x.
 number. Center of output y.
 }
   \item{retention}{
-number. Split point, represents vertical distance from center to upper loop trajectory. It is the intersection of the loop and the output axis characterizing the distortion in the response at the average input challenge.
+number. Split point, represents vertical distance from center to upper loop trajectory. 
+It is the intersection of the loop and the output axis characterizing the distortion in 
+the response at the average input challenge. Assumes symmetrical curve above and below split line.
+}
+  \item{retention.above}{
+number. Retention above the split line. \code{mloop2r} creates a loop where retention above and below the split line may be different.
+}
+  \item{retention.below}{
+number. Retention below the split line.
 }
   \item{sd.x}{
 number. Standard deviation of the normally distributed variation in the input vector x. }
@@ -53,6 +63,9 @@ number of equally spaced points required to make a full loop.
 logical. If true, fit a classical hysteresis loop regardless of n. Uses \deqn{y_t=sign(cos(2*pi*t/period))*b.y*abs(cos(2*pi*t/period))^n + retention*sin(2*pi*t/period)^m+cy+e_{y,t}} instead of 
 \deqn{y_t=b.y*cos(2*pi*t/period)^n+retention*sin(2*pi*t/period)^m+cy+e_{y,t}}
 Allows the user to fit classical loops with any n>1 instead of just odd numbered n. Default is false.
+}
+  \item{seed}{
+integer. Starting seed.
 }
 }
 \details{
@@ -80,6 +93,7 @@ loopmodel
 ##Plot hysteresis loop.
 plot(loopmodel,main="Simulated Hysteresis Loop n=3 m=1",xlab="Input",
 ylab="Output",values="hysteresis.all")
+
 }
 \keyword{ models }
 

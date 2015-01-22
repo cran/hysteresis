@@ -1,6 +1,6 @@
 \name{EllipseData}
 \alias{EllipseData}
-\docType{data}
+\docType{data} 
 \title{
 Simulated Ellipse Data for 6 Ellipses with period=24.
 }
@@ -42,8 +42,8 @@ six.models
  
 #Model fit for B-1
 six.models$models["B",1] 
-#par(mfrow=c(2,3))
-plot(six.models)
-#par(mfrow=c(1,1))
+par(mfrow=c(2,3))
+plot(six.models,xlab="X input",ylab="Y output")
+par(mfrow=c(1,1))
 }
 \keyword{datasets}

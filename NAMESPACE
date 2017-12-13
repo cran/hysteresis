@@ -88,3 +88,6 @@ S3method(rstudent,loopsummarylist2r)
 S3method(fitted,loopsummarylist2r)
 S3method(coef,loopsummarylist2r)
 import(parallel,car,msm,stats, MASS)
+importFrom("grDevices", "xy.coords")
+importFrom("graphics", "arrows", "lines", "mtext", "plot", "points",
+ "segments", "text", "title")
